@@ -25,8 +25,10 @@ Centos系统安装：
 ## 二、设置SSH公钥
 略
 ## 三、基本操作
+从远程仓库克隆：
 
-初始化一个Git仓库(以/home/gitee/test文件夹为例)
+    $ git clone https://gitee.com/***/test.git
+初始化一个Git仓库(以/home/gitee/test文件夹为例):
 
     $ makedir /home/gitee/test 创建文件夹
     $ cd /home/gitee/test   进入文件夹
@@ -34,16 +36,21 @@ Centos系统安装：
     
     $ touch readme.txt
     $ git diff 查看修改
-将文件添加到Git的暂存区
+将文件添加到Git的暂存区:
 
-    $ git add readme.txt
+    $ git add README.md
     $ git add . 添加所有文件
     $ git commit  -m  "提交信息"（注：“提交信息”里面换成你需要，如“first commit”）
     $ git remote add origin https://gitee.com/xxx/xx.git
     $ git push -u origin master 
     $ git push https://gitee.com/***/test.git
 
-查看仓库当前文件提交状态（A：提交成功；AM：文件在添加到缓存之后又有改动）
+分支操作：
+
+    $ git checkout -b newbranch 创建并切换到新分支
+    $ git checkout master 切换到master分支
+
+查看仓库当前文件提交状态（A：提交成功；AM：文件在添加到缓存之后又有改动）:
 
     $ git status -s 
     打印历史记录
