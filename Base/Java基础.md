@@ -1,4 +1,5 @@
-# JAVA EE
+# JAVA SE
+
 ## 一、简介
 ### 1、介绍  
 继承了C++语⾔⾯向对象技术的核⼼，舍弃了容易引起错误的指针，以引⽤取代；移除了C++中
@@ -12,13 +13,12 @@
 2005年，Java SE 6正式发布。此时，Java的各种版本已经更名，如J2SE更名为JavaSE。
 
 原理：先用javac命令编译.java文件,生成了JVM可以识别的.class运行字节码文件,再用java命令执行运行.class文件。 
-特点：
-一个源文件中只能有一个public修饰的类，其他类个数不限；一个源文件有n个类时，编译结果的class文件就有n个；源文件的名字必须和public修饰的类名相同；main方法为入口；每一句以分号;结束。 
+特点：一个源文件中只能有一个public修饰的类，其他类个数不限；一个源文件有n个类时，编译结果的class文件就有n个；源文件的名字必须和public修饰的类名相同；main方法为入口；每一句以分号;结束。 
 注释单行用//多行用/* */  
 第一个HelloWorld代码：
 
     public class HelloWorld{
-    	public static void main(String[] args){
+    	public static void main(String[] args){ 
     		System.out.println("Hello!");
     	}}
 ### 2、安装
@@ -36,12 +36,56 @@ Linux下安装：
     export CLASSPATH=.:$JAVA_HOME/lib:$JAVA_HOME/jre/lib  
     在按esc再输入：wq保存退出。  
     3、执行命令:source /etc/profile让配置文件生效。
+	
 ## 二、基础语法
 
-关键字、标识符、常量、变量（作用域、生命周期、数据类型、运算符）、  
-语句：if-else、do、while、for、switch、break、continue、return  
-switch(){case :...;break;...default:xxx;}  
-函数
+**标识符**：自定义名称的字符序列，由数字，字母，下划线_和 $ 组成，不能以数字开头，区分大小写。
+包名小写，类与接口大驼峰，方法与变量小驼峰，常量下划线连接全大写。
+
+**常量**：固定不变的数据单元，常量也有内存，常量存放在被称为“常量池”。修饰符final，不可改变。
+
+**变量**：保存一个数据的最小内存单元，三要素：数据类型 变量名（标识符） 变量值。
+成员变量：定义在类中，方法外面的变量，它作用范围是整个类方法。
+局部变量：作用范围只能在声明的区域中使用，如方法、代码块中。
+
+**修饰符**：用于对类、变量、方法和构造方法的访问限制。
+public : 对所有类可见。private : 在同一类内可见。
+default (即缺省，什么也不写，不使用任何关键字）: 在同一包内可见。protected : 对同一包内的类和所有子类可见。
+
+**关键字**：有54（48+2保留+3特殊）个，不能用于标识符，小写。
+
+**基本类型**：有8个,独立于Object类，可用==比较：
+整数型（byte 1字节默认0、short 2字节默认0、int 4字节默认0、long 8字节默认0）、浮点型（float 4字节默认0.0f、double 8字节默认0.0d）、
+布尔型boolean 1字节默认false、字符型char 2字节默认'\u0000'。
+
+字节(Byte)是：计算机文件大小的基本计算单位。1个字节(Byte) = 8个位（Bit比特)。1bit是二进制中的一位。数据存储的最小单位是字节，而数据操作的最小单位是比特位。
+
+类型转换：自动隐式：发生在兼容的两种类型，由低向高转换，通过赋值、算术运算实现。强制显式：通过类型说明符强制进行由高向低的类型转换，可能会损失精度或溢出。
+从低到高依次为：byte、char、short->int->long->float->double。
+int t = 100; double t1 = t; //自动类型转换 byte t2 = (byte) t; //强制类型转换
+
+**引用数据类型**：有3个：数组、类、接口。
+Integer 继承了Object类，是对象类型，默认值null。
+String 继承了Object类，用equals方法比较是否相同，用compareTo()返回ascii码值相减。contains(String s) 判断子字符串是否存在，indexOf(String s)从头查找指定字符串的位置，
+substring(int beginIndex,int endIndex)截取字符串，格式化字符串.format()。
+
+**运算符**：
+算数（加+ -减 *乘 /除 %取余 ++自增 --自减）、赋值（=  +=  -= *=  /=  %=）、比较（== != > < >= <=）、
+逻辑（&且 |或 !非 ^异或 && ||左边过则不执行右）、三元（(条件)?表达式1：表达式2;条件为true则1false则2）、位移（>> << >>> & | ~ ^位运算表示按照二进制的每一位进行运算）
+优先级：（）、[]、.方法调用->! 正负 自增减 -> * / % -> + - ->比较运算符 -> 逻辑运算符 -> 条件运算符 -> 赋值运算符
+
+**语句**：
+顺序执行语句。
+条件结构：
+1、if(条件1){1为ture执行;}else if(条件2){2为ture执行;}else{所有条件都不为true执行此处;}复杂条件可自由嵌套组合。
+2、switch(变量){case 值1:执行此;break; case 值n:执行此;break; default:不等于以上所有值时执行此;break;}
+循环结构：1、for(初始化;条件判断;迭代){执行循环体语句}
+2、while(条件判断){} 即先判断后循环。
+2、do{循环体语句}while(条件判断) 即先循环后判断。
+终止本次并结束代码块：break;
+终止本次并继续代码块：continue;
+结束此方法：return ; 
+
 ## 三、面向对象
 **对象**：类的实例  
 构造方法：类会默认有  
@@ -144,7 +188,6 @@ Queue是特殊的线性表，只能在头部插入，尾部删除。
 ### 迭代器Iterator
 用于遍历集合
 	
-
     Iterator iter1 = list1.iterator();
     while(iter.hasNext()){
     	System.out.println((String)iter.next());
